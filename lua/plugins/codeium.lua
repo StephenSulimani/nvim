@@ -8,7 +8,7 @@ return {
                 enabled = true,
                 map_keys = true,
                 key_bindings = {
-                    accept = "<Tab>",
+                    accept = "<C-z>",
                     next = "<C-]>",
                     prev = "<C-[>",
                     accept_word = false,
