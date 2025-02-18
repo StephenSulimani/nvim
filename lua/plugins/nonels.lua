@@ -15,7 +15,11 @@ return {
 				}),
 				null_ls.builtins.formatting.black,
 				null_ls.builtins.formatting.isort,
-				null_ls.builtins.formatting.clang_format,
+				null_ls.builtins.formatting.clang_format.with({
+					extra_args = {
+						"--style={BasedOnStyle: Google, IndentWidth: 4, UseTab: Always}",
+					},
+				}),
 				null_ls.builtins.diagnostics.pylint,
 				null_ls.builtins.diagnostics.golangci_lint,
 				null_ls.builtins.formatting.gofmt,
