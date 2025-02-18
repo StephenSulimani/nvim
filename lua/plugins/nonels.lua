@@ -17,7 +17,7 @@ return {
 				null_ls.builtins.formatting.isort,
 				null_ls.builtins.formatting.clang_format.with({
 					extra_args = {
-						"--style={BasedOnStyle: Google, IndentWidth: 4, UseTab: Always}",
+						"--style={BasedOnStyle: Microsoft, IndentWidth: 4, UseTab: Always}",
 					},
 				}),
 				null_ls.builtins.diagnostics.pylint,
