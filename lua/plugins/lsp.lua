@@ -22,8 +22,21 @@ return {
 
 			require("lsp-setup").setup({
 				capabilities = capabilities,
-				on_attach = function(_client, _bufnr)
-					-- Format on save is handled by conform.nvim
+				on_attach = function(client, bufnr)
+					-- Format on save is handled by conform.nvim (gofumpt).
+					-- Organize imports via gopls (faster and more reliable than goimports on save).
+					if client.name == "gopls" then
+						vim.api.nvim_create_autocmd("BufWritePre", {
+							buffer = bufnr,
+							group = vim.api.nvim_create_augroup("LspGoOrganizeImports", { clear = false }),
+							callback = function()
+								vim.lsp.buf.code_action({
+									context = { only = { "source.organizeImports" } },
+									apply = true,
+								})
+							end,
+						})
+					end
 				end,
 				servers = {
 					gopls = {},
@@ -42,7 +55,6 @@ return {
 					ts_ls = {
 						flags = { debounce_text_changes = 300 },
 					},
-					phpstan = {},
 					tailwindcss = {},
 					neocmake = {
 						cmd = { "neocmakelsp", "stdio" },

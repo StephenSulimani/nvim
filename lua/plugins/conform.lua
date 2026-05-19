@@ -3,13 +3,17 @@ return {
 	config = function()
 		local conform = require("conform")
 		conform.setup({
-			format_on_save = {
-				lsp_fallback = true,
-				timeout_ms = 500,
-			},
+			format_on_save = function(bufnr)
+				-- goimports can be slow on first run or in large modules
+				local timeout_ms = vim.bo[bufnr].filetype == "go" and 15000 or 3000
+				return {
+					timeout_ms = timeout_ms,
+					lsp_fallback = true,
+				}
+			end,
 			formatters_by_ft = {
 				lua = { "stylua" },
-				go = { "goimports", "gofumpt" },
+				go = { "gofumpt" },
 				python = { "black" },
 				javascript = { "prettierd", "eslint_d" },
 				typescript = { "prettierd", "eslint_d" },
