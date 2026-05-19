@@ -54,10 +54,9 @@ end
 return {
 	{
 		"windwp/nvim-ts-autotag",
-		opts = {},
-	},
-	{
+		dependencies = { "junnplus/lsp-setup.nvim" },
 		event = "VeryLazy",
+		opts = {},
 		config = function()
 			setup_web_lsp()
 		end,
