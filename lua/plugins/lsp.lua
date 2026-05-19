@@ -9,18 +9,6 @@ return {
 		end,
 	},
 	{
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		dependencies = { "williamboman/mason.nvim" },
-		config = function()
-			require("mason-tool-installer").setup({
-				ensure_installed = {
-					"goimports",
-					"gofumpt",
-				},
-			})
-		end,
-	},
-	{
 		"junnplus/lsp-setup.nvim",
 		dependencies = {
 			"neovim/nvim-lspconfig",
