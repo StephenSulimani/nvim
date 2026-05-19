@@ -14,8 +14,10 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				go = { "gofumpt" },
-				python = { "black" },
+				python = { "ruff_fix", "ruff_format" },
 				javascript = { "prettierd", "eslint_d" },
+				javascriptreact = { "prettierd", "eslint_d" },
+				jsx = { "prettierd", "eslint_d" },
 				typescript = { "prettierd", "eslint_d" },
 				typescriptreact = { "prettierd", "eslint_d" },
 				json = { "prettierd" },

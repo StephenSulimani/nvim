@@ -40,7 +40,25 @@ return {
 				end,
 				servers = {
 					gopls = {},
-					pyright = {},
+					lua_ls = {
+						settings = {
+							Lua = {
+								diagnostics = { globals = { "vim" } },
+								workspace = { checkThirdParty = false },
+							},
+						},
+					},
+					pyright = {
+						settings = {
+							python = {
+								analysis = {
+									typeCheckingMode = "basic",
+									autoImportCompletions = true,
+									diagnosticMode = "workspace",
+								},
+							},
+						},
+					},
 					clangd = {
 						cmd = {
 							"clangd",
@@ -54,6 +72,32 @@ return {
 					prismals = {},
 					ts_ls = {
 						flags = { debounce_text_changes = 300 },
+						settings = {
+							typescript = {
+								inlayHints = {
+									includeInlayParameterNameHints = "all",
+									includeInlayFunctionParameterTypeHints = true,
+									includeInlayVariableTypeHints = true,
+									includeInlayPropertyDeclarationTypeHints = true,
+									includeInlayFunctionLikeReturnTypeHints = true,
+								},
+								preferences = {
+									importModuleSpecifier = "non-relative",
+								},
+							},
+							javascript = {
+								inlayHints = {
+									includeInlayParameterNameHints = "all",
+									includeInlayFunctionParameterTypeHints = true,
+									includeInlayVariableTypeHints = true,
+									includeInlayPropertyDeclarationTypeHints = true,
+									includeInlayFunctionLikeReturnTypeHints = true,
+								},
+								preferences = {
+									importModuleSpecifier = "non-relative",
+								},
+							},
+						},
 					},
 					tailwindcss = {},
 					neocmake = {
