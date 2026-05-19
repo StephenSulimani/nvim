@@ -1,5 +1,46 @@
 return {
 	{
+		"linux-cultist/venv-selector.nvim",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"neovim/nvim-lspconfig",
+		},
+		ft = "python",
+		keys = {
+			{
+				"<leader>cv",
+				"<cmd>VenvSelect<cr>",
+				desc = "Select Python virtualenv",
+			},
+		},
+		opts = {
+			name = {
+				"venv",
+				".venv",
+				"env",
+				".env",
+			},
+			search_venv_managers = {
+				"pipenv",
+				"poetry",
+				"uv",
+				"pyenv",
+				"virtualenvwrapper",
+			},
+			search = {
+				cwd = "projectDir",
+				ignore_dirs = {
+					"node_modules",
+					"dist",
+					".git",
+				},
+			},
+			options = {
+				picker = "telescope",
+			},
+		},
+	},
+	{
 		"mfussenegger/nvim-dap-python",
 		dependencies = {
 			"mfussenegger/nvim-dap",

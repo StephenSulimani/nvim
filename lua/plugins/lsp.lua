@@ -70,34 +70,9 @@ return {
 					},
 					eslint = {},
 					prismals = {},
+					-- ts_ls inlay hints and tailwind tweaks are applied in lua/plugins/web.lua
 					ts_ls = {
 						flags = { debounce_text_changes = 300 },
-						settings = {
-							typescript = {
-								inlayHints = {
-									includeInlayParameterNameHints = "all",
-									includeInlayFunctionParameterTypeHints = true,
-									includeInlayVariableTypeHints = true,
-									includeInlayPropertyDeclarationTypeHints = true,
-									includeInlayFunctionLikeReturnTypeHints = true,
-								},
-								preferences = {
-									importModuleSpecifier = "non-relative",
-								},
-							},
-							javascript = {
-								inlayHints = {
-									includeInlayParameterNameHints = "all",
-									includeInlayFunctionParameterTypeHints = true,
-									includeInlayVariableTypeHints = true,
-									includeInlayPropertyDeclarationTypeHints = true,
-									includeInlayFunctionLikeReturnTypeHints = true,
-								},
-								preferences = {
-									importModuleSpecifier = "non-relative",
-								},
-							},
-						},
 					},
 					tailwindcss = {},
 					neocmake = {
