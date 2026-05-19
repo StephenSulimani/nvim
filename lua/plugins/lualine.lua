@@ -1,8 +1,16 @@
 return {
-    "nvim-lualine/lualine.nvim",
-    config = function()
-        require("lualine").setup({
-            theme = "dracula",
-        })
-    end,
+	"nvim-lualine/lualine.nvim",
+	config = function()
+		require("lualine").setup({
+			theme = "dracula",
+			sections = {
+				lualine_c = {
+					{
+						"filename",
+						path = 1,
+					},
+				},
+			},
+		})
+	end,
 }
