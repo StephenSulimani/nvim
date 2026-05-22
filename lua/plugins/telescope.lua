@@ -12,6 +12,7 @@ return {
 			local builtin = require("telescope.builtin")
 
 			telescope.setup({
+				history = false,
 				preview = {
 					-- Avoid ft_to_lang crash if an old telescope build is still on disk
 					treesitter = false,
