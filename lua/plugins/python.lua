@@ -1,3 +1,7 @@
+local function uv_available()
+	return vim.fn.executable("uv") == 1
+end
+
 return {
 	{
 		"linux-cultist/venv-selector.nvim",
@@ -10,34 +14,17 @@ return {
 			{
 				"<leader>cv",
 				"<cmd>VenvSelect<cr>",
-				desc = "Select Python virtualenv",
+				desc = "Select Python virtualenv (uv .venv)",
 			},
 		},
 		opts = {
-			name = {
-				"venv",
-				".venv",
-				"env",
-				".env",
-			},
-			search_venv_managers = {
-				"pipenv",
-				"poetry",
-				"uv",
-				"pyenv",
-				"virtualenvwrapper",
-			},
-			search = {
-				cwd = "projectDir",
-				ignore_dirs = {
-					"node_modules",
-					"dist",
-					".git",
-				},
-			},
 			options = {
 				picker = "telescope",
+				notify_user_on_venv_activation = true,
+				cached_venv_automatic_activation = true,
+				enable_default_searches = true,
 			},
+			-- Default fd searches find uv's `.venv` in cwd/workspace; PEP 723 scripts use uv automatically.
 		},
 	},
 	{
@@ -48,12 +35,18 @@ return {
 		},
 		ft = "python",
 		config = function()
-			local python = "python3"
-			local ok, registry = pcall(require, "mason-registry")
-			if ok and registry.is_installed("debugpy") then
-				python = registry.get_package("debugpy"):get_install_path() .. "/venv/bin/python"
+			if uv_available() then
+				require("dap-python").setup("uv")
+			else
+				local python = "python3"
+				local ok, registry = pcall(require, "mason-registry")
+				if ok and registry.is_installed("debugpy") then
+					python = registry.get_package("debugpy"):get_install_path() .. "/venv/bin/python"
+				end
+				require("dap-python").setup(python)
+				vim.notify("uv not in PATH — using Mason debugpy for DAP", vim.log.levels.WARN)
 			end
-			require("dap-python").setup(python)
+			require("dap-python").test_runner = "pytest"
 		end,
 	},
 }

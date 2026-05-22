@@ -51,6 +51,7 @@ return {
 					"prettierd",
 					"ruff",
 					"stylua",
+					"uv",
 				},
 				run_on_start = true,
 			})

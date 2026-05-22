@@ -51,6 +51,8 @@ return {
 					pyright = {
 						settings = {
 							python = {
+								-- uv sync creates .venv at the project root by default
+								venv = ".venv",
 								analysis = {
 									typeCheckingMode = "basic",
 									autoImportCompletions = true,
