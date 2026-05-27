@@ -47,6 +47,7 @@ return {
 				vim.notify("uv not in PATH — using Mason debugpy for DAP", vim.log.levels.WARN)
 			end
 			require("dap-python").test_runner = "pytest"
+			require("pycoverage").setup()
 		end,
 	},
 }
