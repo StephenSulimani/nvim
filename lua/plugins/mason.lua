@@ -39,6 +39,8 @@ return {
 				ensure_installed = {
 					"autopep8",
 					"black",
+					"clang-format",
+					"codelldb",
 					"debugpy",
 					"eslint_d",
 					"eugene",

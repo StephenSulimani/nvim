@@ -14,8 +14,8 @@ return {
 				callback = function()
 					-- Enables native syntax highlighting
 					pcall(vim.treesitter.start)
-					-- Enables native tree-sitter based indentation (replaces indent = { enable = true })
-					vim.bo.indentexpr = "v:lua.vim.treesitter.foldexpr()"
+					-- Treesitter-based indent (foldexpr is for folding, not indentation)
+					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 				end,
 			})
 

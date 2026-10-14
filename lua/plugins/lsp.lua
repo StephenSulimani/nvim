@@ -39,7 +39,14 @@ return {
 					end
 				end,
 				servers = {
-					gopls = {},
+					gopls = {
+						settings = {
+							gopls = {
+								-- Must live under settings.gopls; top-level buildFlags is ignored.
+								buildFlags = { "-tags", "integration,dev,manual" },
+							},
+						},
+					},
 					lua_ls = {
 						settings = {
 							Lua = {
@@ -61,13 +68,31 @@ return {
 							},
 						},
 					},
+					-- Compile flags (incl. -std=c++11/etc) come from compile_commands.json
+					-- or .clangd — never hardcode a language standard here.
+					-- :CppCompileDb links build/compile_commands.json; FileType autocmd also auto-links.
 					clangd = {
 						cmd = {
 							"clangd",
+							"--background-index",
+							"--clang-tidy",
 							"--header-insertion=iwyu",
 							"--completion-style=detailed",
 							"--function-arg-placeholders",
 							"--fallback-style=llvm",
+						},
+						root_markers = {
+							"compile_commands.json",
+							".clangd",
+							".clang-tidy",
+							".clang-format",
+							"compile_flags.txt",
+							"CMakeLists.txt",
+							"Makefile",
+							"makefile",
+							"GNUmakefile",
+							"configure.ac",
+							".git",
 						},
 					},
 					eslint = {},

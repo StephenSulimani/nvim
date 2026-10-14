@@ -18,6 +18,11 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				go = { "gofumpt" },
+				c = { "clang-format" },
+				cpp = { "clang-format" },
+				objc = { "clang-format" },
+				objcpp = { "clang-format" },
+				cuda = { "clang-format" },
 				python = function(bufnr)
 					if vim.fs.root(bufnr, { "uv.lock" }) and vim.fn.executable("uv") == 1 then
 						return { "ruff_fix_uv", "ruff_format_uv" }
