@@ -1,3 +1,29 @@
+local function load_dotenv(path)
+	local file = io.open(path, "r")
+	if not file then
+		return
+	end
+	for line in file:lines() do
+		if not line:match("^%s*#") and not line:match("^%s*$") then
+			local key, value = line:match("^%s*export%s+([%w_]+)%s*=%s*(.*)$")
+			if not key then
+				key, value = line:match("^%s*([%w_]+)%s*=%s*(.*)$")
+			end
+			if key and vim.env[key] == nil then
+				value = vim.trim(value or "")
+				local quote = value:sub(1, 1)
+				if (quote == '"' or quote == "'") and value:sub(-1) == quote then
+					value = value:sub(2, -2)
+				end
+				vim.env[key] = value
+			end
+		end
+	end
+	file:close()
+end
+
+load_dotenv(vim.fn.stdpath("config") .. "/.env")
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 vim.opt.clipboard = "unnamedplus"
